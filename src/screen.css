@@ -1,0 +1,39 @@
+.inside-screen{
+    height: 100%;
+    width: 100%;
+    background-color: turquoise;
+    border-radius: 0.25rem;
+}
+
+.notification-panel{
+    height: 7%;
+    width: 100%;
+    border-bottom: 1px solid rgb(185, 185, 185);
+    background: linear-gradient(0deg, rgba(214,214,214,1) 6%, rgba(227,227,227,0.94) 89%);
+    text-align: start;
+    position: relative;
+}
+
+.noty-text{
+    font-size: small;
+    font-weight: bold;
+    position: absolute;
+    left: 5px;
+    bottom: 0.4px;
+}
+
+.battery{
+    float: right;
+}
+
+.bat{
+    height: 12px;
+    padding: 3px;
+}
+
+.menu-list{
+    border: 1px solid black;
+    background-color: white;
+    height: 99.9%;
+    width: 45%;
+}

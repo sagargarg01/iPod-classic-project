@@ -30,6 +30,7 @@
   margin-bottom: 35px;
   width: 90%;
   height: 45%;
+  overflow: hidden;
 }
 
 .buttons-container{

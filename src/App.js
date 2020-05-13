@@ -4,6 +4,7 @@ import menu from './assets/menu.svg'
 import fastforward from './assets/fast_forward.svg'
 import play_pause from './assets/play_pause.svg'
 import rewind from './assets/rewind.svg'
+import Sc from './screen.js'
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
         <div className="body">
 
         <div className="screen">
-
+          <Sc/>
         </div>
 
         <div className="buttons-container">
