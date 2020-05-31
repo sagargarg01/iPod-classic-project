@@ -1,6 +1,7 @@
 import React from 'react';
 import './screen.css'
 import battery from './assets/battery.svg'
+import arrowright from './assets/arrow_right.svg'
 
 function screen() {
 
@@ -19,10 +20,10 @@ function screen() {
                 </div>
 
                 <div className="list">
-                   <div>Cover Flow</div>
-                   <div>Music</div>
-                   <div>Games</div>
-                   <div>Settings</div>
+                   <div className="active" id="coverflow">Cover Flow <span><img src={arrowright}></img></span></div>
+                   <div className="" id="music">Music <span><img src={arrowright}></img></span></div>
+                   <div className="" id="games">Games <span><img src={arrowright}></img></span></div>
+                   <div className="" id="settings">Settings <span><img src={arrowright}></img></span></div>
                 </div>
 
             </div>

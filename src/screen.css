@@ -50,3 +50,15 @@
 .list div{
     padding: 5px;
 }
+
+.active{
+    color: white;
+    background: linear-gradient(rgb(60, 184, 255) 0%, rgb(52, 122, 181) 100%);
+}
+
+.list div span img {
+    height: 17px;
+    width: 17px;
+    float: right;
+    padding-top: 2px;
+}
