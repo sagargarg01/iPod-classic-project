@@ -18,6 +18,13 @@ function screen() {
                   </span>
                 </div>
 
+                <div className="list">
+                   <div>Cover Flow</div>
+                   <div>Music</div>
+                   <div>Games</div>
+                   <div>Settings</div>
+                </div>
+
             </div>
 
         </div>

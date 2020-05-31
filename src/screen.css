@@ -1,4 +1,6 @@
 .inside-screen{
+    pointer-events: none;
+    user-select: none;
     height: 100%;
     width: 100%;
     background-color: turquoise;
@@ -12,6 +14,7 @@
     background: linear-gradient(0deg, rgba(214,214,214,1) 6%, rgba(227,227,227,0.94) 89%);
     text-align: start;
     position: relative;
+    border-top-left-radius: 0.2rem;
 }
 
 .noty-text{
@@ -36,4 +39,14 @@
     background-color: white;
     height: 99.9%;
     width: 45%;
+    border-top-left-radius: 0.2rem;
+}
+
+.list{
+    font-weight: bold;
+    text-align: start;
+}
+
+.list div{
+    padding: 5px;
 }
