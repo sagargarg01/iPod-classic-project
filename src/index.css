@@ -1,13 +1,164 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.App {
+  text-align: center;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.layout{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.body{
+  height: 570px;
+  width: 380px;
+  box-shadow: rgb(85, 85, 85) 0px 0px 2.4em inset;
+    -webkit-box-reflect: below 0px 
+    -webkit-gradient(linear, 0% 0%, 0% 100%, 
+    from(transparent), 
+    color-stop(0.5, transparent), 
+    to(rgba(250, 250, 250, 0.3)));
+  border-radius: 30px;
+  background: linear-gradient(rgb(227, 227, 227) 0%, rgb(214, 214, 214) 100%);
+  /* animation: 1.5s ease 0s 1 normal none running descend; */
+}
+.screen{
+  border: 4px solid black;
+  background: white;
+  border-radius: 0.5rem;
+  margin:auto;
+  margin-top: 10px;
+  margin-bottom: 35px;
+  width: 90%;
+  height: 45%;
+  overflow: hidden;
+}
+
+.buttons-container{
+  width:100%;
+  height: 220px;
+}
+
+.buttons{
+  border: 1px solid rgb(185, 185, 185);
+  background: white;
+  margin: auto;
+  height: 220px;
+  width: 220px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.inner-disk{
+    border: 1px solid rgb(185, 185, 185);;
+    width: 88px;
+    height: 88px;
+    box-shadow: rgb(191, 191, 191) 0px 1em 3em inset; 
+    border-radius: 50%;
+    margin: auto;
+    background: rgb(225, 225, 225); 
+}
+
+.inner-disk:active{
+  box-shadow: rgb(158, 158, 158) 0px 1em 3em inset; 
+}
+
+.menu{
+position: absolute; 
+top: 30px;
+left: 87px;
+max-height: 13px;
+pointer-events: none;
+user-select: none;
+}
+
+.play_pause{
+ position: absolute;
+ bottom: 30px;
+ left: 93px;
+ max-height: 13px;
+ pointer-events: none;
+ user-select: none;
+}
+
+.fastforward{
+  position: absolute;
+  right: 15px;
+  max-height: 13px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.rewind{
+  position: absolute;
+  left: 15px;
+  max-height: 13px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.inside-screen{
+  pointer-events: none;
+  user-select: none;
+  height: 100%;
+  width: 100%;
+  background-color: turquoise;
+  border-radius: 0.25rem;
+}
+
+.notification-panel{
+  height: 7%;
+  width: 100%;
+  border-bottom: 1px solid rgb(185, 185, 185);
+  background: linear-gradient(0deg, rgba(214,214,214,1) 6%, rgba(227,227,227,0.94) 89%);
+  text-align: start;
+  position: relative;
+  border-top-left-radius: 0.2rem;
+}
+
+.noty-text{
+  font-size: small;
+  font-weight: bold;
+  position: absolute;
+  left: 5px;
+  bottom: 0.4px;
+}
+
+.battery{
+  float: right;
+}
+
+.bat{
+  height: 12px;
+  padding: 3px;
+}
+
+.menu-list{
+  border: 1px solid black;
+  background-color: white;
+  height: 99.9%;
+  width: 45%;
+  border-top-left-radius: 0.2rem;
+}
+
+.list{
+  font-weight: bold;
+  text-align: start;
+}
+
+.list div{
+  padding: 5px;
+}
+
+.active{
+  color: white;
+  background: linear-gradient(rgb(60, 184, 255) 0%, rgb(52, 122, 181) 100%);
+}
+
+.list div span img {
+  height: 17px;
+  width: 17px;
+  float: right;
+  padding-top: 2px;
 }
