@@ -4,7 +4,7 @@ const CoverFlow = () => {
 
    return(
       <div>
-         coverflow
+         CoverFlow
       </div>
    )
 

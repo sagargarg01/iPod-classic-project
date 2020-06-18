@@ -21,6 +21,11 @@
   background: linear-gradient(rgb(227, 227, 227) 0%, rgb(214, 214, 214) 100%);
   /* animation: 1.5s ease 0s 1 normal none running descend; */
 }
+
+.cont{
+  height: 100%;
+}
+
 .screen{
   border: 4px solid black;
   background: white;
@@ -99,12 +104,15 @@ user-select: none;
 }
 
 .inside-screen{
-  pointer-events: none;
-  user-select: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* pointer-events: none; */
+  /* user-select: none; */
   height: 100%;
   width: 100%;
-  background-color: turquoise;
   border-radius: 0.25rem;
+  display: flex;
+  flex-wrap: nowrap;
+  position: relative;
 }
 
 .notification-panel{
@@ -135,11 +143,13 @@ user-select: none;
 }
 
 .menu-list{
-  border: 1px solid black;
+  box-shadow: black 0px 0px 24px;
   background-color: white;
   height: 99.9%;
   width: 45%;
   border-top-left-radius: 0.2rem;
+  position: relative;
+  z-index: 5;
 }
 
 .list{
@@ -161,4 +171,56 @@ user-select: none;
   width: 17px;
   float: right;
   padding-top: 2px;
+}
+
+.rm{
+  display: none;
+}
+
+.coverflow img{
+  position: absolute;
+  height: 100%;
+  background-size: contain;
+}
+
+.bg{
+  position: absolute;
+  height: 100%; 
+  /* 260px but ehy */
+  width: 100%;
+  background-size: contain;
+  background: linear-gradient(rgb(177, 181, 192) 0%, rgb(104, 110, 122) 100%);
+}
+
+.games img{
+  width: 100px;
+  margin: 70px;
+  margin-left: -70px;
+}
+
+.games div{
+  position: absolute;
+  bottom: 22%;
+  left: 22%;
+  color: white;
+  text-transform: capitalize;
+}
+
+.settings img{
+  margin: 90px;
+  margin-left: -50px;
+  height: 50px;
+}
+
+.settings div {
+  position: absolute;
+  bottom: 35%;
+  left: 22%;
+  color: white;
+  font-weight: 500;
+}
+
+.name{
+  left: 15% !important;
+  bottom: 27% !important;
 }

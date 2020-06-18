@@ -3,7 +3,7 @@ import React from 'react';
 const music = () => {
    return(
       <div>
-         music
+         Music
       </div>
    )
 }
