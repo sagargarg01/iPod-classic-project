@@ -20,6 +20,7 @@
   border-radius: 30px;
   background: linear-gradient(rgb(227, 227, 227) 0%, rgb(214, 214, 214) 100%);
   /* animation: 1.5s ease 0s 1 normal none running descend; */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .cont{
@@ -74,7 +75,6 @@ position: absolute;
 top: 30px;
 left: 87px;
 max-height: 13px;
-pointer-events: none;
 user-select: none;
 }
 
@@ -104,7 +104,6 @@ user-select: none;
 }
 
 .inside-screen{
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   /* pointer-events: none; */
   /* user-select: none; */
   height: 100%;
@@ -223,4 +222,62 @@ user-select: none;
 .name{
   left: 15% !important;
   bottom: 27% !important;
+}
+
+.in-coverflow{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  padding-top: 20px;
+}
+
+.thumbnail img{
+  height: 120px;
+  width: 120px;
+}
+
+.notification-panel2{
+  height: 20px;
+  width: 100%;
+    border-bottom: 1px solid rgb(185, 185, 185);
+    background: linear-gradient(0deg, rgba(214,214,214,1) 6%, rgba(227,227,227,0.94) 89%);
+    text-align: start;
+    position: relative;
+    border-top-left-radius: 0.2rem;
+}
+
+.battery2{
+  float: right;
+  padding-right: 5px;
+}
+
+.content{
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.content .thumbnail img {
+  padding: 20px;
+  padding-top: 30px;
+}
+
+.description{
+  padding-top: 30px;
+}
+
+.description div{
+  text-align: start;
+}
+
+.description .songName{
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.artist{
+  font-size: 13px;
+}
+
+.artist span{
+  font-weight: 500;
 }

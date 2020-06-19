@@ -5,7 +5,6 @@ import play_pause from '../assets/play_pause.svg'
 import rewind from '../assets/rewind.svg'
 import Screen from './screen/screen.js'
 import ZingTouch from 'zingtouch';
-import settings from './screen/list/settings';
 
 class App extends React.Component {
 
@@ -159,10 +158,10 @@ class App extends React.Component {
               <div className="buttons" id="object" onMouseOver={this.zingarea}>
                 <div className="inner-disk" onClick={this.onClick}></div>
 
-                <img src={menu} className="menu" onClick={this.showmenu} />
-                <img src={play_pause} className="play_pause" />
-                <img src={fastforward} className="fastforward" />
-                <img src={rewind} className="rewind" />
+                <img src={menu} className="menu" onClick={this.showmenu} alt="" />
+                <img src={play_pause} className="play_pause" alt="" />
+                <img src={fastforward} className="fastforward" alt=""/>
+                <img src={rewind} className="rewind" alt="" />
 
               </div>
 
