@@ -5,13 +5,23 @@ import play_pause from '../assets/play_pause.svg'
 import rewind from '../assets/rewind.svg'
 import Screen from './screen/screen.js'
 import ZingTouch from 'zingtouch';
+import song from '../assets/songs/Closer.mp3'
+import pic from '../assets/coverflow/songicon/closer.jpg'
 
 class App extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      items: [],
+      track : {
+        name: "Closer",
+        artist: "Various Artist",
+        album: "Closer",
+        artwork: pic,
+        duration: 261,
+        source: song
+      },
+      playingStatus: false,
       loading: true,
 
       coverflow: true,
@@ -22,6 +32,8 @@ class App extends React.Component {
       showmenu: true
     };
   }
+
+  
 
   // function to work rotate wheel
   zingarea = () => {
@@ -121,11 +133,61 @@ class App extends React.Component {
       }
     });
   }
+  
+  togglePlay = (status) => {
+
+    let audio =  document.getElementsByTagName("audio")[0];
+
+    if(status === true){
+      audio.play();
+      this.timer(true);
+    }
+    else{
+      audio.pause();
+      this.timer(false);
+    }
+
+  }
+
+  // -------------------------------------------------------------
+  // not correct , shit 
+  timer = (status) => {
+    let timer = document.getElementById("song_id");
+    console.log('i am here', timer)
+
+    let current = parseInt(timer.innerText);
+    console.log('i am here', current)
+    let totalTime = this.state.track.duration;
+    let min = current/60;
+    let sec = current%60;
+
+   let time =  setInterval(function(){
+      if(current === totalTime){clearInterval(time);}
+
+      current++;
+      sec++;
+
+      if(sec>59){ sec = 0; min++;}
+
+      let truesec = sec;
+      if(sec<=9){truesec=`0${sec}`;}
+      timer.innerText = `${min}:${truesec}`;
+    },1000);
+  
+  }
 
   onClick = () => {
     this.setState({
       showmenu: false
     })
+
+    if(this.state.coverflow || this.state.music){
+      this.setState({
+        playingStatus: true
+      })
+
+      this.togglePlay(true)
+    }
   }
 
   showmenu = () => {
@@ -136,8 +198,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { coverflow, music, games, settings, showmenu } = this.state;
-    console.log(this.state)
+    const { coverflow, music, games, settings, showmenu, track, playingStatus } = this.state;
     return (
       <div className="App">
         <div className="layout">
@@ -150,6 +211,8 @@ class App extends React.Component {
                 music={music}
                 games={games}
                 settings={settings}
+                track={track}
+                playingStatus={playingStatus}
               />
             </div>
 
@@ -172,8 +235,6 @@ class App extends React.Component {
 
     );
   }
-
-
 }
 
 

@@ -4,13 +4,13 @@ import arrowright from '../../assets/arrow_right.svg'
 import closer from '../../assets/coverflow/closer.png'
 import icon from '../../assets/games/games-icon.png'
 import rIcon from '../../assets/logo192.png'
-import song from '../../assets/songs/Closer.mp3'
-import pic from '../../assets/coverflow/songicon/closer.jpg'
 import play from '../../assets/play.svg'
+import dice from '../../assets/dice.svg'
+import logo from '../../assets/ipod_logo.svg'
 
 function screen(props) {
 
-    const { coverflow, music, games, settings, showmenu } = props;
+    const { coverflow, music, games, settings, showmenu, track, playingStatus } = props;
 
     return (
         <div className="cont">
@@ -25,6 +25,11 @@ function screen(props) {
                         <span className="battery">
                             <img src={battery} alt="battery" className="bat" />
                         </span>
+
+                        <span className={`${playingStatus ? "battery" : "rm"}`}>
+                            <img src={play} alt="battery" className="bat" />
+                        </span>
+
                     </div>
 
                     <div className="list">
@@ -76,7 +81,7 @@ function screen(props) {
 
             {/* -------------------------------------------------------------------------------------------- */}
             {/* music player */}
-                <div>
+                <div className={`${coverflow ? "mp" : "rm"}`}>
                     <div className="notification-panel2">
                         <span className="noty-text">Now Playing</span>
                         <span className="battery2">
@@ -89,34 +94,45 @@ function screen(props) {
 
                     <div className="content">
                         <div className="thumbnail">
-                            <img src={pic} alt=""></img>
+                            <img src={track.artwork} alt=""></img>
                         </div>
                         <div className="description">
                             <div className="songName">
-                                Closer
+                                {track.name}
                              </div>
-                            <div>Closer</div>
-                            <div className="artist"> <span>Composed by</span>  Various Artist </div>
+                            <div>{track.album}</div>
+                            <div className="artist"> <span>Composed by</span>  {track.artist} </div>
                         </div>
                     </div>
 
                     <div className="player">
-                        <audio controls>
-                            <source src={song}></source>
+                        <audio>
+                            <source src={track.source}></source>
                         </audio>
+                        <span className="timer" id="song_id">0.00</span>
+                        <div className="fillup"></div>
+                        <span className="time">4:21</span>
                     </div>
                 </div>
 
 
                 {/* -------------------------------------------------------------------------- */}
                 {/* games */}
-                <div>
-
+                <div className={`${games ? "gm" : "rm"}`}>
+                    <img src={dice} alt=""></img>
                 </div>
 
+                {/* -------------------------------------------------------------------------- */}
                 {/* settings */}
+                <div className={`${settings ? "setting" : "rm"}`}>
+                    <div>
+                        <img src={logo} alt=""></img>
+                    </div>
+                    <div className="text">
+                        MADE BY SAGAR GARG
+                    </div>
+                </div>
             </div>
-
         </div>
     )
 }

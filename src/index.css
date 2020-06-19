@@ -219,6 +219,8 @@ user-select: none;
   font-weight: 500;
 }
 
+/* ---------- music and coverflow --------------- */
+
 .name{
   left: 15% !important;
   bottom: 27% !important;
@@ -251,6 +253,10 @@ user-select: none;
   padding-right: 5px;
 }
 
+.mp{
+  position: relative;
+}
+
 .content{
   display: flex;
   flex-wrap: nowrap;
@@ -281,3 +287,64 @@ user-select: none;
 .artist span{
   font-weight: 500;
 }
+
+.player{
+  border: 0.4px solid lightgray;
+  border-left: 0px;
+  border-right: 0px;
+  height: 15px;
+  width: 70%;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.fillup{
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(0deg, rgba(60,215,227,1) 0%, rgba(70,95,252,1) 53%);
+}
+
+.timer{
+  position: absolute;
+  left:20px;
+  bottom: 0px;
+  font-size: small;
+}
+
+.time{
+  position: absolute;
+  right: 20px;
+  bottom: 0px;
+  font-size: small;
+}
+
+
+/* ---------- games --------------- */
+.gm{
+  height: 100%;
+  background: linear-gradient(rgb(177, 181, 192) 0%, rgb(104, 110, 122) 100%);
+}
+
+.gm img{
+  height: 60%;
+  padding: 50px;
+}
+
+/* ---------- settings --------------- */
+.setting{
+  height: 100%;
+  padding: 50px;
+}
+
+.setting img {
+  height: 100px;
+}
+
+.text{
+  font-weight: bold;
+}
+
+.pod{
+  margin-top: -50px;
+}
+
