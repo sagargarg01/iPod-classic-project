@@ -226,11 +226,11 @@ class App extends React.Component {
     var bar = document.getElementById('fill');
     var width = parseInt(bar.getAttribute('width'));
     let self = this;
-    console.log(bar, width)
     var filled = setInterval(function(){
 
       // console.log(self.state.play)
-      if(self.state.play === false){
+      if(self.state.play === false || width === 100){
+        bar.setAttribute("width",0)
         clearInterval(filled)
       }
       else{
@@ -255,6 +255,11 @@ class App extends React.Component {
 
     var time = setInterval(function () {
       if (self.state.play === false || timePlayed === self.state.track.duration) {
+        timer.setAttribute("data",0);
+        self.setState({
+          play:false,
+          playingStatus: false
+        })
         clearInterval(time)
       }
       else {
