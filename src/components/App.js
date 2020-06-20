@@ -220,26 +220,28 @@ class App extends React.Component {
   }
 
 
-// fills the music bar 
+  // fills the music bar 
   setBar = () => {
-    
+
     var bar = document.getElementById('fill');
     var width = parseInt(bar.getAttribute('width'));
     let self = this;
-    var filled = setInterval(function(){
+    var filled = setInterval(function () {
 
       // console.log(self.state.play)
-      if(self.state.play === false || width === 100){
-        bar.setAttribute("width",0)
+      if (self.state.play === false || width === 100) {
+        if (width === 100) {
+          bar.setAttribute("width", 0)
+        }
         clearInterval(filled)
       }
-      else{
+      else {
         width += 1;
-        bar.style.width = `${width}%` 
-        bar.setAttribute("width",width)
+        bar.style.width = `${width}%`
+        bar.setAttribute("width", width)
       }
 
-    },2600);
+    }, 2600);
   }
 
   // -------------------------------------------------------------
@@ -255,11 +257,14 @@ class App extends React.Component {
 
     var time = setInterval(function () {
       if (self.state.play === false || timePlayed === self.state.track.duration) {
-        timer.setAttribute("data",0);
-        self.setState({
-          play:false,
-          playingStatus: false
-        })
+
+        if (timePlayed === self.state.track.duration) {
+          timer.setAttribute("data", 0);
+          self.setState({
+            play: false,
+            playingStatus: false
+          })
+        }
         clearInterval(time)
       }
       else {
@@ -276,7 +281,7 @@ class App extends React.Component {
     }, 1000);
   }
 
-// center button function
+  // center button function
   onClick = () => {
     if (this.state.music === true && this.state.musicmenu === false) {
       this.setState({
