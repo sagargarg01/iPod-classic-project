@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
 }
-
+/* body tag */
 .body{
   height: 570px;
   width: 380px;
@@ -19,14 +19,14 @@
     to(rgba(250, 250, 250, 0.3)));
   border-radius: 30px;
   background: linear-gradient(rgb(227, 227, 227) 0%, rgb(214, 214, 214) 100%);
-  /* animation: 1.5s ease 0s 1 normal none running descend; */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .cont{
   height: 100%;
 }
-
+ 
+/* screen style */
 .screen{
   border: 4px solid black;
   background: white;
@@ -43,6 +43,8 @@
   width:100%;
   height: 220px;
 }
+
+/* roate button style */
 
 .buttons{
   border: 1px solid rgb(185, 185, 185);
@@ -83,7 +85,6 @@ user-select: none;
  bottom: 30px;
  left: 93px;
  max-height: 13px;
- pointer-events: none;
  user-select: none;
 }
 
@@ -103,9 +104,10 @@ user-select: none;
   user-select: none;
 }
 
+/* inside screen style */
 .inside-screen{
-  /* pointer-events: none; */
-  /* user-select: none; */
+  pointer-events: none;
+  user-select: none;
   height: 100%;
   width: 100%;
   border-radius: 0.25rem;
@@ -160,6 +162,7 @@ user-select: none;
   padding: 5px;
 }
 
+/* shows active class style */
 .active{
   color: white;
   background: linear-gradient(rgb(60, 184, 255) 0%, rgb(52, 122, 181) 100%);
@@ -176,6 +179,7 @@ user-select: none;
   display: none;
 }
 
+/* coverfow */
 .coverflow img{
   position: absolute;
   height: 100%;
@@ -185,12 +189,12 @@ user-select: none;
 .bg{
   position: absolute;
   height: 100%; 
-  /* 260px but ehy */
   width: 100%;
   background-size: contain;
   background: linear-gradient(rgb(177, 181, 192) 0%, rgb(104, 110, 122) 100%);
 }
 
+/* games */
 .games img{
   width: 100px;
   margin: 70px;
@@ -205,6 +209,7 @@ user-select: none;
   text-transform: capitalize;
 }
 
+/* settings */
 .settings img{
   margin: 90px;
   margin-left: -50px;
@@ -220,7 +225,7 @@ user-select: none;
 }
 
 /* ---------- music and coverflow --------------- */
-
+/* music player style */
 .name{
   left: 15% !important;
   bottom: 27% !important;
@@ -234,8 +239,12 @@ user-select: none;
 }
 
 .thumbnail img{
-  height: 120px;
-  width: 120px;
+  height: 110px;
+  width: 110px;
+}
+
+.thumbnail{
+  padding-left: 10px;
 }
 
 .notification-panel2{
@@ -295,13 +304,14 @@ user-select: none;
   height: 15px;
   width: 70%;
   margin: auto;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .fillup{
   height: 100%;
-  width: 100%;
+  width: 0%;
   background: linear-gradient(0deg, rgba(60,215,227,1) 0%, rgba(70,95,252,1) 53%);
+  animation: ease-in;
 }
 
 .timer{
@@ -340,11 +350,14 @@ user-select: none;
   height: 100px;
 }
 
-.text{
-  font-weight: bold;
+.st_cont{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
 }
 
-.pod{
-  margin-top: -50px;
+.ipod{
+  font-weight: bolder;
+  margin-top: 40px;
+  margin-left: 5px;
 }
-

@@ -4,13 +4,14 @@ import arrowright from '../../assets/arrow_right.svg'
 import closer from '../../assets/coverflow/closer.png'
 import icon from '../../assets/games/games-icon.png'
 import rIcon from '../../assets/logo192.png'
-import play from '../../assets/play.svg'
+import playic from '../../assets/play.svg'
+import pause from '../../assets/pause.svg'
 import dice from '../../assets/dice.svg'
 import logo from '../../assets/ipod_logo.svg'
 
 function screen(props) {
 
-    const { coverflow, music, games, settings, showmenu, track, playingStatus } = props;
+    const { coverflow, music, games, settings, showmenu, track, playingStatus, play, artist, albums, musicmenu } = props;
 
     return (
         <div className="cont">
@@ -26,34 +27,52 @@ function screen(props) {
                             <img src={battery} alt="battery" className="bat" />
                         </span>
 
-                        <span className={`${playingStatus ? "battery" : "rm"}`}>
-                            <img src={play} alt="battery" className="bat" />
+                        <span className={`${playingStatus ? "" : "rm"}`}>
+                            <span className={`${play ? "battery2" : "rm"}`}>
+                                <img src={playic} alt="play" className="bat" />
+                            </span>
+
+                            <span className={`${play ? "rm" : "battery2"}`}>
+                                <img src={pause} alt="pause" className="bat" />
+                            </span>
                         </span>
 
                     </div>
 
-                    <div className="list">
-                        <div className={`${coverflow ? "active" : ''}`} id="coverflow">
-                            CoverFlow
+{/* ---------------------- main list ----------------------------------------- */}
+                    <div className={`${musicmenu ? "rm" : "list"}`}>
+                        <div className={`${coverflow ? "active" : ''}`}>
+                            Cover Flow
                        <span><img src={arrowright} alt="right"></img></span></div>
 
-                        <div className={`${music ? "active" : ''}`} id="music">
+                        <div className={`${music ? "active" : ''}`}>
                             Music
                        <span><img src={arrowright} alt="right"></img></span></div>
 
-                        <div className={`${games ? "active" : ''}`} id="games">
+                        <div className={`${games ? "active" : ''}`}>
                             Games
                        <span><img src={arrowright} alt="right"></img></span></div>
 
-                        <div className={`${settings ? "active" : ''}`} id="settings">
+                        <div className={`${settings ? "active" : ''}`}>
                             Settings
                        <span><img src={arrowright} alt="right" ></img></span></div>
                     </div>
 
+{/* --------------------music sub-menu --------------------------------- */}
+                    <div className={`${musicmenu ? "list" : "rm"}`}>
+                        <div className={`${artist ? "active" : ''}`}>
+                            Artist
+                       <span><img src={arrowright} alt="right"></img></span></div>
+
+                        <div className={`${albums ? "active" : ''}`}>
+                            Album
+                       <span><img src={arrowright} alt="right"></img></span></div>
+                    </div>
+
                 </div>
 
-            {/* -------------------------------------------------------------------------------------------- */}
-                {/*                           list aside function                                   */}
+{/* -------------------------------------------------------------------------------------------- */}
+{/*                           list aside function                                   */}
                 <div>
                     <div className={`${coverflow || music ? "coverflow" : 'rm'}`} >
                         <img src={closer} alt="song"></img>
@@ -74,22 +93,30 @@ function screen(props) {
                 </div>
             </div>
 
-            {/* -------------------------------------------------------------------------------------------- */}
-            {/* this div is now gonna work in opposite manner, when above is working it will be none and when that becomes none , this will work */}
+{/* -------------------------------------------------------------------------------------------- */}
+{/* this div is now gonna work in opposite manner, when above is working it will be none 
+and when that becomes none , this will work */}
 
             <div className="cont">
 
-            {/* -------------------------------------------------------------------------------------------- */}
-            {/* music player */}
-                <div className={`${coverflow ? "mp" : "rm"}`}>
+                {/* -------------------------------------------------------------------------------------------- */}
+                {/* music player */}
+                <div className={`${coverflow || music ? "mp" : "rm"}`}>
                     <div className="notification-panel2">
                         <span className="noty-text">Now Playing</span>
                         <span className="battery2">
                             <img src={battery} alt="battery" className="bat" />
                         </span>
-                        <span className="battery2">
-                            <img src={play} alt="battery" className="bat" />
+                        <span className={`${playingStatus ? "" : "rm"}`}>
+                            <span className={`${play ? "battery2" : "rm"}`}>
+                                <img src={playic} alt="play" className="bat" />
+                            </span>
+
+                            <span className={`${play ? "rm" : "battery2"}`}>
+                                <img src={pause} alt="pause" className="bat" />
+                            </span>
                         </span>
+
                     </div>
 
                     <div className="content">
@@ -99,7 +126,7 @@ function screen(props) {
                         <div className="description">
                             <div className="songName">
                                 {track.name}
-                             </div>
+                            </div>
                             <div>{track.album}</div>
                             <div className="artist"> <span>Composed by</span>  {track.artist} </div>
                         </div>
@@ -109,8 +136,8 @@ function screen(props) {
                         <audio>
                             <source src={track.source}></source>
                         </audio>
-                        <span className="timer" id="song_id">0.00</span>
-                        <div className="fillup"></div>
+                        <span className="timer" id="song_id" data="0">0.00</span>
+                        <div className="fillup" id="fill" width="0"></div>
                         <span className="time">4:21</span>
                     </div>
                 </div>
@@ -125,9 +152,15 @@ function screen(props) {
                 {/* -------------------------------------------------------------------------- */}
                 {/* settings */}
                 <div className={`${settings ? "setting" : "rm"}`}>
+                    <div className="st_cont">
                     <div>
                         <img src={logo} alt=""></img>
                     </div>
+                    <div className="ipod">
+                        iPod.js
+                    </div>
+                    </div>
+                   
                     <div className="text">
                         MADE BY SAGAR GARG
                     </div>
