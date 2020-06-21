@@ -56,7 +56,6 @@ class App extends React.Component {
       var angle = event.detail.distanceFromLast;
 
       if (self.state.showmenu === true && self.state.musicmenu === false) {
-        // //still not a good approach :(
         if (angle < 0) {
           // anticlockwise
           if (counter > 0 && counter <= 5) {
