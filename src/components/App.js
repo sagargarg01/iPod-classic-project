@@ -49,6 +49,8 @@ class App extends React.Component {
     var containerElement = document.getElementById('container');
     var activeRegion = ZingTouch.Region(containerElement);
     var childElement = document.getElementById('object');
+    var audio = document.getElementsByTagName("audio")[0];
+    var vol = audio.volume;
 
     activeRegion.bind(childElement, 'rotate', function (event) {
       //Perform Operations
@@ -137,7 +139,7 @@ class App extends React.Component {
         }
       }
 
-      if (self.state.musicmenu === true) {
+      else if (self.state.musicmenu === true) {
         // *********************************************************
         // sub menu
         if (angle < 0) {
@@ -177,6 +179,28 @@ class App extends React.Component {
           if (counter2 > 10) { counter2 = 10 }
           else { counter2 = counter2 + 1; }
 
+        }
+      }
+
+      // -------------------------------------------------------
+      // volume controllers
+      else if(self.state.showmenu === false && self.state.musicmenu === false && self.state.playingStatus === true){
+        if(angle < 0){
+          // anticlock wise
+          // dec volume
+          if(vol > 0.01 && vol <=1){
+          vol = vol - 0.01;
+          audio.volume = vol;
+          }
+        }
+
+        else if(angle > 0){
+          // clockwise
+          // inc volume
+          if(vol >=0 && vol < 0.99){
+          vol = vol + 0.01;
+          audio.volume = vol;
+          }
         }
       }
     });

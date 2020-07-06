@@ -2,10 +2,6 @@
   "name": "ipod_project",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": "12.16.1" ,
-    "npm": "6.13.4" 
-  },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -13,6 +9,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
+    "swiper": "^5.4.5",
     "zingtouch": "^1.0.6"
   },
   "scripts": {
