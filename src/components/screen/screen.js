@@ -1,13 +1,6 @@
 import React from 'react';
-import battery from '../../assets/battery.svg'
-import arrowright from '../../assets/arrow_right.svg'
-import closer from '../../assets/coverflow/closer.png'
-import icon from '../../assets/games/games-icon.png'
-import rIcon from '../../assets/logo192.png'
-import playic from '../../assets/play.svg'
-import pause from '../../assets/pause.svg'
-import dice from '../../assets/dice.svg'
-import logo from '../../assets/ipod_logo.svg'
+import assets from '../../assets/assets';
+import MenuList from './ScreenComponent/MenuList.js';
 
 function screen(props) {
 
@@ -18,84 +11,22 @@ function screen(props) {
             {/* -------------------------------------------------------------------------------------------- */}
             {/*                              works till menu list is visible                                 */}
 
-            <div className={`${showmenu ? "inside-screen" : "rm"}`} >
-                <div className="menu-list">
+            <MenuList
+                showmenu={showmenu}
+                playingStatus={playingStatus}
+                coverflow={coverflow}
+                play={play}
+                musicmenu={musicmenu}
+                music={music}
+                games={games}
+                settings={settings}
+                artist={artist}
+                albums={albums}
+            />
 
-                    <div className="notification-panel">
-                        <span className="noty-text">iPod.js</span>
-                        <span className="battery">
-                            <img src={battery} alt="battery" className="bat" />
-                        </span>
-
-                        <span className={`${playingStatus ? "" : "rm"}`}>
-                            <span className={`${play ? "battery2" : "rm"}`}>
-                                <img src={playic} alt="play" className="bat" />
-                            </span>
-
-                            <span className={`${play ? "rm" : "battery2"}`}>
-                                <img src={pause} alt="pause" className="bat" />
-                            </span>
-                        </span>
-
-                    </div>
-
-{/* ---------------------- main list ----------------------------------------- */}
-                    <div className={`${musicmenu ? "rm" : "list"}`}>
-                        <div className={`${coverflow ? "active" : ''}`}>
-                            Cover Flow
-                       <span><img src={arrowright} alt="right"></img></span></div>
-
-                        <div className={`${music ? "active" : ''}`}>
-                            Music
-                       <span><img src={arrowright} alt="right"></img></span></div>
-
-                        <div className={`${games ? "active" : ''}`}>
-                            Games
-                       <span><img src={arrowright} alt="right"></img></span></div>
-
-                        <div className={`${settings ? "active" : ''}`}>
-                            Settings
-                       <span><img src={arrowright} alt="right" ></img></span></div>
-                    </div>
-
-{/* --------------------music sub-menu --------------------------------- */}
-                    <div className={`${musicmenu ? "list" : "rm"}`}>
-                        <div className={`${artist ? "active" : ''}`}>
-                            Artist
-                       <span><img src={arrowright} alt="right"></img></span></div>
-
-                        <div className={`${albums ? "active" : ''}`}>
-                            Album
-                       <span><img src={arrowright} alt="right"></img></span></div>
-                    </div>
-
-                </div>
-
-{/* -------------------------------------------------------------------------------------------- */}
-{/*                           list aside function                                   */}
-                <div>
-                    <div className={`${coverflow || music ? "coverflow" : 'rm'}`} >
-                        <img src={closer} alt="song"></img>
-                    </div>
-
-                    <div className={`${games ? "games bg" : 'rm'}`} >
-                        <img src={icon} alt=""></img>
-                        <div>
-                            games
-                        </div>
-                    </div>
-
-                    <div className={`${settings ? "bg settings" : 'rm'}`} >
-                        <img src={rIcon} alt=""></img>
-                        <div>iPod.js</div>
-                        <div className="name">by Sagar Garg</div>
-                    </div>
-                </div>
-            </div>
-
-{/* -------------------------------------------------------------------------------------------- */}
-{/* this div is now gonna work in opposite manner, when above is working it will be none 
-and when that becomes none , this will work */}
+            {/* -------------------------------------------------------------------------------------------- */}
+            {/* this div is now gonna work in opposite manner, when above is working it will be none 
+                and when that becomes none , this will work */}
 
             <div className="cont">
 
@@ -105,15 +36,15 @@ and when that becomes none , this will work */}
                     <div className="notification-panel2">
                         <span className="noty-text">Now Playing</span>
                         <span className="battery2">
-                            <img src={battery} alt="battery" className="bat" />
+                            <img src={assets.battery} alt="battery" className="bat" />
                         </span>
                         <span className={`${playingStatus ? "" : "rm"}`}>
                             <span className={`${play ? "battery2" : "rm"}`}>
-                                <img src={playic} alt="play" className="bat" />
+                                <img src={assets.playic} alt="play" className="bat" />
                             </span>
 
-                            <span className={`${play ? "rm" : "battery2"}`}>
-                                <img src={pause} alt="pause" className="bat" />
+                            <span className={`${assets.play ? "rm" : "battery2"}`}>
+                                <img src={assets.pause} alt="pause" className="bat" />
                             </span>
                         </span>
 
@@ -146,29 +77,31 @@ and when that becomes none , this will work */}
                 {/* -------------------------------------------------------------------------- */}
                 {/* games */}
                 <div className={`${games ? "gm" : "rm"}`}>
-                    <img src={dice} alt=""></img>
+                    <img src={assets.dice} alt=""></img>
                 </div>
 
                 {/* -------------------------------------------------------------------------- */}
                 {/* settings */}
                 <div className={`${settings ? "setting" : "rm"}`}>
                     <div className="st_cont">
-                    <div>
-                        <img src={logo} alt=""></img>
+                        <div>
+                            <img src={assets.logo} alt=""></img>
+                        </div>
+                        <div className="ipod">
+                            iPod.js
                     </div>
-                    <div className="ipod">
-                        iPod.js
                     </div>
-                    </div>
-                   
+
                     <div className="text">
                         MADE BY SAGAR GARG
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
+
+
 
 
 export default screen;

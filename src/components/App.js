@@ -184,22 +184,22 @@ class App extends React.Component {
 
       // -------------------------------------------------------
       // volume controllers
-      else if(self.state.showmenu === false && self.state.musicmenu === false && self.state.playingStatus === true){
-        if(angle < 0){
+      else if (self.state.showmenu === false && self.state.musicmenu === false && self.state.playingStatus === true) {
+        if (angle < 0) {
           // anticlock wise
           // dec volume
-          if(vol > 0.01 && vol <=1){
-          vol = vol - 0.01;
-          audio.volume = vol;
+          if (vol > 0.01 && vol <= 1) {
+            vol = vol - 0.01;
+            audio.volume = vol;
           }
         }
 
-        else if(angle > 0){
+        else if (angle > 0) {
           // clockwise
           // inc volume
-          if(vol >=0 && vol < 0.99){
-          vol = vol + 0.01;
-          audio.volume = vol;
+          if (vol >= 0 && vol < 0.99) {
+            vol = vol + 0.01;
+            audio.volume = vol;
           }
         }
       }
