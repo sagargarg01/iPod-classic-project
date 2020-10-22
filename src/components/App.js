@@ -1,49 +1,34 @@
 import React from 'react';
-import menu from '../assets/menu.svg'
-import fastforward from '../assets/fast_forward.svg'
-import play_pause from '../assets/play_pause.svg'
-import rewind from '../assets/rewind.svg'
+import assets from '../assets/assets'
+import coverflow from '../assets/coverflow/coverflow'
 import Screen from './screen/screen.js'
 import ZingTouch from 'zingtouch';
-import song from '../assets/songs/Closer.mp3'
-import pic from '../assets/coverflow/songicon/closer.jpg'
 
 class App extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      track: {
-        name: "Closer",
-        artist: "Various Artist",
-        album: "Closer",
-        artwork: pic,
-        duration: 261,
-        source: song
-      },
       playingStatus: false,
       play: false,
       loading: true,
-
-      coverflow: true,
-      music: false,
-      games: false,
-      settings: false,
+      mainMenu: "coverflow",
 
       musicmenu: false,
-      albums: false,
-      artist: true,
+      musicMenuName: "artist",
+
+      showSongs: false,
+      activeSongId: 0,
 
       showmenu: true
     };
   }
 
-
-
   // function to work rotate wheel
   zingarea = () => {
     var counter = 0;
     var counter2 = 0;
+    var c3 = 0;
     const self = this;
 
     var containerElement = document.getElementById('container');
@@ -62,34 +47,22 @@ class App extends React.Component {
           // anticlockwise
           if (counter > 0 && counter <= 5) {
             self.setState({
-              coverflow: true,
-              music: false,
-              games: false,
-              settings: false
+              mainMenu: "coverflow"
             })
           }
           else if (counter > 5 && counter <= 10) {
             self.setState({
-              coverflow: false,
-              music: true,
-              games: false,
-              settings: false
+              mainMenu: "music"
             })
           }
           else if (counter > 10 && counter <= 15) {
             self.setState({
-              coverflow: false,
-              music: false,
-              games: true,
-              settings: false
+              mainMenu: "games"
             })
           }
           else if (counter > 15 && counter <= 20) {
             self.setState({
-              coverflow: false,
-              music: false,
-              games: false,
-              settings: true
+              mainMenu: "settings"
             })
           }
 
@@ -102,34 +75,22 @@ class App extends React.Component {
           //clockwise
           if (counter >= 0 && counter < 5) {
             self.setState({
-              coverflow: true,
-              music: false,
-              games: false,
-              settings: false
+              mainMenu: "coverflow"
             })
           }
           else if (counter >= 5 && counter < 10) {
             self.setState({
-              coverflow: false,
-              music: true,
-              games: false,
-              settings: false
+              mainMenu: "music"
             })
           }
           else if (counter >= 10 && counter < 15) {
             self.setState({
-              coverflow: false,
-              music: false,
-              games: true,
-              settings: false
+              mainMenu: "games"
             })
           }
           else if (counter >= 15 && counter < 20) {
             self.setState({
-              coverflow: false,
-              music: false,
-              games: false,
-              settings: true
+              mainMenu: "settings"
             })
           }
 
@@ -139,25 +100,23 @@ class App extends React.Component {
         }
       }
 
-      else if (self.state.musicmenu === true) {
+      else if (self.state.musicmenu === true && self.state.showSongs === false) {
         // *********************************************************
         // sub menu
         if (angle < 0) {
           // anticlockwise
           if (counter2 > 0 && counter2 <= 5) {
             self.setState({
-              artist: true,
-              albums: false
+              musicMenuName: "artist"
             })
           }
           else if (counter2 > 5 && counter2 <= 10) {
             self.setState({
-              artist: false,
-              albums: true
+              musicMenuName: "albums"
             })
           }
 
-          if (counter2 < 0) { counter2 = 0 }
+          if (counter2 === 0) { counter2 = 0 }
           else { counter2 = counter2 - 1; }
         }
 
@@ -165,26 +124,45 @@ class App extends React.Component {
           // clockwise
           if (counter2 >= 0 && counter2 < 5) {
             self.setState({
-              artist: true,
-              albums: false
+              musicMenuName: "artist"
             })
           }
           else if (counter2 >= 5 && counter2 < 10) {
             self.setState({
-              artist: false,
-              albums: true
+              musicMenuName: "albums"
             })
           }
 
-          if (counter2 > 10) { counter2 = 10 }
+          if (counter2 === 10) { counter2 = 10 }
           else { counter2 = counter2 + 1; }
-
         }
       }
 
-      // -------------------------------------------------------
+      else if (self.state.showSongs === true) {
+        if (angle < 0) {
+          if (10 * self.state.activeSongId > c3) {
+            self.setState(prevState => ({
+              activeSongId: prevState.activeSongId - 1
+            }))
+          }
+
+          c3 = (c3 === 0) ? 0 : c3 - 1;
+        }
+
+        else if (angle > 0) {
+          // clockwise
+          if (10 * self.state.activeSongId < c3) {
+            self.setState(prevState => ({
+              activeSongId: prevState.activeSongId + 1
+            }))
+          }
+
+          c3 = (c3 === 10 * (coverflow.length - 1)) ? 10 * (coverflow.length - 1) : c3 + 1;
+        }
+      }
+
       // volume controllers
-      else if (self.state.showmenu === false && self.state.musicmenu === false && self.state.playingStatus === true) {
+      else if (self.state.showmenu === false && self.state.playingStatus === true) {
         if (angle < 0) {
           // anticlock wise
           // dec volume
@@ -205,7 +183,6 @@ class App extends React.Component {
       }
     });
   }
-
 
   // function to play and pause the song
   playpause = () => {
@@ -230,6 +207,7 @@ class App extends React.Component {
   togglePlay = (status) => {
 
     let audio = document.getElementsByTagName("audio")[0];
+    console.log(audio);
 
     if (status === true) {
       audio.play();
@@ -241,7 +219,6 @@ class App extends React.Component {
     }
 
   }
-
 
   // fills the music bar 
   setBar = () => {
@@ -270,6 +247,7 @@ class App extends React.Component {
   // -------------------------------------------------------------
   // music timer function
   timer = () => {
+    const { activeSongId } = this.state;
     this.setBar();
     var timer = document.getElementById('song_id');
     var timePlayed = parseInt(timer.getAttribute("data"));
@@ -279,9 +257,9 @@ class App extends React.Component {
     var sec = timePlayed % 60;
 
     var time = setInterval(function () {
-      if (self.state.play === false || timePlayed === self.state.track.duration) {
+      if (self.state.play === false || timePlayed === coverflow[activeSongId].duration) {
 
-        if (timePlayed === self.state.track.duration) {
+        if (timePlayed === coverflow[activeSongId].duration) {
           timer.setAttribute("data", 0);
           self.setState({
             play: false,
@@ -306,9 +284,14 @@ class App extends React.Component {
 
   // center button function
   onClick = () => {
-    if (this.state.music === true && this.state.musicmenu === false) {
+    if (this.state.mainMenu === "music" && this.state.musicmenu === false) {
       this.setState({
         musicmenu: true
+      })
+    }
+    else if (this.state.musicmenu === true && this.state.showSongs === false) {
+      this.setState({
+        showSongs: true
       })
     }
     else {
@@ -316,37 +299,38 @@ class App extends React.Component {
         showmenu: false
       })
 
-      if (this.state.playingStatus === false) {
+      if (this.state.playingStatus === false && this.state.showSongs) {
+        this.setState({
+          playingStatus: true,
+          play: true
+        })
 
-        if (this.state.coverflow || this.state.music) {
-          this.setState({
-            playingStatus: true,
-            play: true
-          })
-
-          this.togglePlay(true)
-        }
+        this.togglePlay(true)
       }
     }
   }
 
-
   // function to show and hide side menu
   showmenu = () => {
-    if (this.state.musicmenu === true && this.state.showmenu === true) {
-      this.setState({
-        musicmenu: false
-      })
-    }
-    else {
+    if (this.state.showmenu === false) {
       this.setState({
         showmenu: true
+      })
+    }
+    else if (this.state.showSongs) {
+      this.setState({
+        showSongs: false
+      })
+    }
+    else if (this.state.musicmenu === true) {
+      this.setState({
+        musicmenu: false
       })
     }
   }
 
   render() {
-    const { coverflow, music, games, settings, showmenu, track, playingStatus, play, musicmenu, artist, albums } = this.state;
+    const { mainMenu, showmenu, playingStatus, play, musicmenu, musicMenuName, showSongs, activeSongId } = this.state;
     return (
       <div className="App">
         <div className="layout">
@@ -354,17 +338,14 @@ class App extends React.Component {
 
             <div className="screen">
               <Screen
+                mainMenu={mainMenu}
                 showmenu={showmenu}
-                coverflow={coverflow}
-                music={music}
-                games={games}
-                settings={settings}
-                track={track}
                 playingStatus={playingStatus}
                 play={play}
                 musicmenu={musicmenu}
-                artist={artist}
-                albums={albums}
+                musicMenuName={musicMenuName}
+                showSongs={showSongs}
+                activeSongId={activeSongId}
               />
             </div>
 
@@ -373,10 +354,10 @@ class App extends React.Component {
               <div className="buttons" id="object" onMouseOver={this.zingarea}>
                 <div className="inner-disk" onClick={this.onClick}></div>
 
-                <img src={menu} className="menu" onClick={this.showmenu} alt="" />
-                <img src={play_pause} className="play_pause" alt="" onClick={this.playpause} />
-                <img src={fastforward} className="fastforward" alt="" />
-                <img src={rewind} className="rewind" alt="" />
+                <img src={assets.menu} className="menu" onClick={this.showmenu} alt="" />
+                <img src={assets.play_pause} className="play_pause" alt="" onClick={this.playpause} />
+                <img src={assets.fastforward} className="fastforward" alt="" />
+                <img src={assets.rewind} className="rewind" alt="" />
 
               </div>
 

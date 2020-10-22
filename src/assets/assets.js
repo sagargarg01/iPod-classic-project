@@ -6,6 +6,10 @@ import playic from './play.svg'
 import pause from './pause.svg'
 import dice from './dice.svg'
 import logo from './ipod_logo.svg'
+import menu from './menu.svg'
+import fastforward from './fast_forward.svg'
+import play_pause from './play_pause.svg'
+import rewind from './rewind.svg'
 
 const assets = {
    battery,
@@ -15,7 +19,11 @@ const assets = {
    playic,
    pause,
    dice,
-   logo
+   logo,
+   menu,
+   fastforward,
+   play_pause,
+   rewind
 }
 
 export default assets;
