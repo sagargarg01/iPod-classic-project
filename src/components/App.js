@@ -18,6 +18,7 @@ class App extends React.Component {
       musicMenuName: "artist",
 
       showSongs: false,
+      playingSongId: 0,
       activeSongId: 0,
 
       showmenu: true
@@ -34,7 +35,7 @@ class App extends React.Component {
     var containerElement = document.getElementById('container');
     var activeRegion = ZingTouch.Region(containerElement);
     var childElement = document.getElementById('object');
-    var audio = document.getElementsByTagName("audio")[0];
+    let audio = document.getElementsByClassName('audio')[0];
     var vol = audio.volume;
 
     activeRegion.bind(childElement, 'rotate', function (event) {
@@ -42,7 +43,7 @@ class App extends React.Component {
 
       var angle = event.detail.distanceFromLast;
 
-      if (self.state.showmenu === true && self.state.musicmenu === false) {
+      if (self.state.showmenu && self.state.musicmenu === false) {
         if (angle < 0) {
           // anticlockwise
           if (counter > 0 && counter <= 5) {
@@ -100,7 +101,7 @@ class App extends React.Component {
         }
       }
 
-      else if (self.state.musicmenu === true && self.state.showSongs === false) {
+      else if (self.state.musicmenu && self.state.showSongs === false) {
         // *********************************************************
         // sub menu
         if (angle < 0) {
@@ -138,7 +139,7 @@ class App extends React.Component {
         }
       }
 
-      else if (self.state.showSongs === true) {
+      else if (self.state.showSongs && self.state.showmenu) {
         if (angle < 0) {
           if (10 * self.state.activeSongId > c3) {
             self.setState(prevState => ({
@@ -186,49 +187,52 @@ class App extends React.Component {
 
   // function to play and pause the song
   playpause = () => {
+    let audio = document.getElementsByClassName('audio')[0];
 
     if (this.state.playingStatus === true) {
       if (this.state.play === true) {
         this.setState({
           play: false
         })
-        this.togglePlay(false)
+        audio.pause();
+        this.timer();
       }
       else {
         this.setState({
           play: true
         })
-        this.togglePlay(true)
+        audio.play();
+        this.timer();
       }
     }
   }
 
   // helper function to play and pause audio 
-  togglePlay = (status) => {
+  startMusic = () => {
 
-    let audio = document.getElementsByTagName("audio")[0];
-    console.log(audio);
+    let audio = document.getElementsByClassName('audio')[0];
+    audio.play();
+    this.timer();
 
-    if (status === true) {
-      audio.play();
-      this.timer();
-    }
-    else {
-      audio.pause();
-      this.timer();
-    }
+  }
 
+  stopMusic = () => {
+    let audio = document.getElementsByClassName('audio')[0];
+    audio.pause();
+    audio.currentTime = 0;
+
+    document.getElementById('song_id').setAttribute('data', 0);
+    document.getElementById('fill').setAttribute('width', -1);
   }
 
   // fills the music bar 
   setBar = () => {
-
+    var filled;
     var bar = document.getElementById('fill');
     var width = parseInt(bar.getAttribute('width'));
     let self = this;
-    var filled = setInterval(function () {
+    filled = setInterval(function () {
 
-      // console.log(self.state.play)
       if (self.state.play === false || width === 100) {
         if (width === 100) {
           bar.setAttribute("width", 0)
@@ -299,13 +303,15 @@ class App extends React.Component {
         showmenu: false
       })
 
-      if (this.state.playingStatus === false && this.state.showSongs) {
-        this.setState({
+      if (this.state.showSongs) {
+        if (this.state.playingStatus && this.state.playingSongId != this.state.activeSongId) this.stopMusic();
+
+        this.setState(prevState => ({
+          playingSongId: prevState.activeSongId,
           playingStatus: true,
           play: true
-        })
+        }));
 
-        this.togglePlay(true)
       }
     }
   }
@@ -330,7 +336,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { mainMenu, showmenu, playingStatus, play, musicmenu, musicMenuName, showSongs, activeSongId } = this.state;
+    const { mainMenu, showmenu, playingStatus, play, musicmenu, musicMenuName, showSongs, activeSongId, playingSongId } = this.state;
     return (
       <div className="App">
         <div className="layout">
@@ -346,6 +352,8 @@ class App extends React.Component {
                 musicMenuName={musicMenuName}
                 showSongs={showSongs}
                 activeSongId={activeSongId}
+                playingSongId={playingSongId}
+                startMusic={this.startMusic}
               />
             </div>
 
