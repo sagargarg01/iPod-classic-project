@@ -306,7 +306,7 @@
     rgba(60, 215, 227, 1) 0%,
     rgba(70, 95, 252, 1) 53%
   );
-  animation: ease-in;
+  transition: linear 0.4s;
 }
 
 .timer {

@@ -6,7 +6,7 @@ import Settings from './ScreenComponent/Settings';
 
 function screen(props) {
 
-    const { mainMenu, showmenu, playingStatus, play, musicmenu, musicMenuName, showSongs, activeSongId, playingSongId, startMusic } = props;
+    const { mainMenu, showmenu, playingStatus, play, musicmenu, musicMenuName, showSongs, activeSongId, playingSongId } = props;
 
     return (
         <div className="cont">
@@ -29,7 +29,6 @@ function screen(props) {
                     mainMenu={mainMenu}
                     play={play}
                     playingSongId={playingSongId}
-                    startMusic={startMusic}
                 />
 
                 {/* -------------------------------------------------------------------------- */}

@@ -195,96 +195,37 @@ class App extends React.Component {
           play: false
         })
         audio.pause();
-        this.timer();
       }
       else {
         this.setState({
           play: true
         })
         audio.play();
-        this.timer();
       }
     }
   }
 
-  // helper function to play and pause audio 
   startMusic = () => {
-
-    let audio = document.getElementsByClassName('audio')[0];
-    audio.play();
-    this.timer();
-
+    this.setState(prevState => ({
+      playingSongId: prevState.activeSongId,
+      playingStatus: true,
+      play: true
+    }));
   }
 
   stopMusic = () => {
-    let audio = document.getElementsByClassName('audio')[0];
-    audio.pause();
-    audio.currentTime = 0;
-
-    document.getElementById('song_id').setAttribute('data', 0);
-    document.getElementById('fill').setAttribute('width', -1);
+    this.setState({
+      playingSongId: 0,
+      playingStatus: false,
+      play: false
+    });
   }
 
-  // fills the music bar 
-  setBar = () => {
-    var filled;
-    var bar = document.getElementById('fill');
-    var width = parseInt(bar.getAttribute('width'));
-    let self = this;
-    filled = setInterval(function () {
-
-      if (self.state.play === false || width === 100) {
-        if (width === 100) {
-          bar.setAttribute("width", 0)
-        }
-        clearInterval(filled)
-      }
-      else {
-        width += 1;
-        bar.style.width = `${width}%`
-        bar.setAttribute("width", width)
-      }
-
-    }, 2600);
+  changeMusic = () => {
+    this.setState({ play: false });
+    this.startMusic();
   }
 
-  // -------------------------------------------------------------
-  // music timer function
-  timer = () => {
-    const { activeSongId } = this.state;
-    this.setBar();
-    var timer = document.getElementById('song_id');
-    var timePlayed = parseInt(timer.getAttribute("data"));
-
-    var self = this;
-    var min = parseInt(timePlayed / 60);
-    var sec = timePlayed % 60;
-
-    var time = setInterval(function () {
-      if (self.state.play === false || timePlayed === coverflow[activeSongId].duration) {
-
-        if (timePlayed === coverflow[activeSongId].duration) {
-          timer.setAttribute("data", 0);
-          self.setState({
-            play: false,
-            playingStatus: false
-          })
-        }
-        clearInterval(time)
-      }
-      else {
-        sec++;
-        timePlayed++;
-
-        if (sec > 59) { min++; sec = 0 }
-        if (sec <= 9) { sec = `0${sec}` }
-
-        timer.innerText = `${min}:${sec}`;
-        timer.setAttribute("data", timePlayed);
-      }
-
-    }, 1000);
-  }
 
   // center button function
   onClick = () => {
@@ -304,14 +245,8 @@ class App extends React.Component {
       })
 
       if (this.state.showSongs) {
-        if (this.state.playingStatus && this.state.playingSongId != this.state.activeSongId) this.stopMusic();
-
-        this.setState(prevState => ({
-          playingSongId: prevState.activeSongId,
-          playingStatus: true,
-          play: true
-        }));
-
+        if (this.state.playingStatus && this.state.playingSongId !== this.state.activeSongId) this.changeMusic();
+        else this.startMusic();
       }
     }
   }
@@ -353,7 +288,6 @@ class App extends React.Component {
                 showSongs={showSongs}
                 activeSongId={activeSongId}
                 playingSongId={playingSongId}
-                startMusic={this.startMusic}
               />
             </div>
 
