@@ -10,6 +10,8 @@ import menu from './menu.svg'
 import fastforward from './fast_forward.svg'
 import play_pause from './play_pause.svg'
 import rewind from './rewind.svg'
+import volume from './volume.png'
+import lowVolume from './lowVolume.png'
 
 const assets = {
    battery,
@@ -23,7 +25,9 @@ const assets = {
    menu,
    fastforward,
    play_pause,
-   rewind
+   rewind,
+   volume,
+   lowVolume
 }
 
 export default assets;

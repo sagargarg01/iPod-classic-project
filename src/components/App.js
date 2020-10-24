@@ -30,11 +30,13 @@ class App extends React.Component {
     var counter = 0;
     var counter2 = 0;
     var c3 = 0;
+
     const self = this;
 
     var containerElement = document.getElementById('container');
     var activeRegion = ZingTouch.Region(containerElement);
     var childElement = document.getElementById('object');
+    var volumeController = document.getElementsByClassName('volumeController')[0];
     let audio = document.getElementsByClassName('audio')[0];
     var vol = audio.volume;
 
@@ -181,6 +183,15 @@ class App extends React.Component {
             audio.volume = vol;
           }
         }
+        volumeController.innerHTML = `
+        <div> <img src = 
+          ${parseInt(audio.volume * 100) < 45 ? assets.lowVolume : assets.volume} />
+         </div>
+        <div className = "volume">${parseInt(audio.volume * 100)}</div>`
+
+        setTimeout(() => {
+          volumeController.innerHTML = ''
+        }, 3500)
       }
     });
   }

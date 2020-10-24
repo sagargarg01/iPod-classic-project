@@ -3,6 +3,7 @@ import assets from '../../assets/assets';
 import MenuList from './ScreenComponent/MenuList.js';
 import MusicPlayer from './ScreenComponent/MusicPlayer';
 import Settings from './ScreenComponent/Settings';
+import CoverFlow from './ScreenComponent/CoverFlow';
 
 function screen(props) {
 
@@ -23,6 +24,13 @@ function screen(props) {
             />
 
             <div className="cont">
+                {/* coverflow */}
+                <CoverFlow
+                    mainMenu={mainMenu}
+                    playingStatus={playingStatus}
+                    play={play}
+                />
+
                 {/* -------------------------------------------------------------------------------------------- */}
                 <MusicPlayer
                     playingStatus={playingStatus}
