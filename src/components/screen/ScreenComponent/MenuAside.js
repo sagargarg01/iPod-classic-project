@@ -1,32 +1,21 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import coverFlow from '../../../assets/coverflow/coverflow'
 import assets from '../../../assets/assets'
-import { useState } from 'react'
+import { AppContext } from '../../../context/playContext'
 
-const MenuAside = ({ mainMenu }) => {
-  const startSlideShow = () => {
+const MenuAside = () => {
+  const { activeState, dataIndex } = useContext(AppContext)
+
+  useEffect(() => {
     let sildeShowImages = document.getElementsByClassName('slideShowImage')[0]
 
     setInterval(function () {
       sildeShowImages.setAttribute('src', coverFlow[getIndex()].images)
     }, 6000)
-  }
+  }, [])
 
   const getIndex = () => {
     return Math.ceil(Math.random() * coverFlow.length) - 1
-  }
-
-  const SlideShow = () => {
-    return (
-      <div className='slideShow'>
-        <img
-          src={coverFlow[getIndex()].images}
-          alt=''
-          className='slideShowImage'
-          onLoad={startSlideShow}
-        />
-      </div>
-    )
   }
 
   const GamesImage = () => {
@@ -50,14 +39,14 @@ const MenuAside = ({ mainMenu }) => {
 
   return (
     <div>
-      {/* check if use Memo could help here, have to change complete implementation yrr */}
-      <SlideShow />
+      <div className='slideShow'>
+        <img src={coverFlow[1].images} alt='' className='slideShowImage' />
+      </div>
 
-      {mainMenu === 'games' && <GamesImage />}
+      {activeState === 2 && dataIndex === 0 && <GamesImage />}
 
-      {mainMenu === 'settings' && <Settings />}
+      {activeState === 3 && dataIndex === 0 && <Settings />}
     </div>
   )
 }
-
 export default MenuAside

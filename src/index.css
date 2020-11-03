@@ -160,6 +160,7 @@
 
 .list div {
   padding: 5px;
+  text-transform: capitalize;
 }
 
 /* shows active class style */

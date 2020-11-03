@@ -4,7 +4,6 @@ import MusicPlayer from './ScreenComponent/MusicPlayer'
 import Settings from './ScreenComponent/Settings'
 import CoverFlow from './ScreenComponent/CoverFlow'
 import Games from './ScreenComponent/Games'
-import coverflow from '../../assets/coverflow/coverflow.js'
 
 function screen({
   mainMenu,
@@ -47,17 +46,7 @@ function screen({
   return (
     <div className='cont'>
       {/* -------------------------------------------------------------------------------------------- */}
-      {showmenu && (
-        <MenuList
-          mainMenu={mainMenu}
-          playingStatus={playingStatus}
-          play={play}
-          musicmenu={musicmenu}
-          musicMenuName={musicMenuName}
-          showSongs={showSongs}
-          activeSongId={activeSongId}
-        />
-      )}
+      <MenuList />
 
       {!showmenu && <Functionality />}
     </div>

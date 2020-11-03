@@ -1,10 +1,10 @@
 import React from 'react'
 import NotficationBar from './NotificationBar'
 
-function CoverFlow({ mainMenu, playingStatus, play }) {
+function CoverFlow() {
   return (
     <div className='coverflow'>
-      <NotficationBar playingStatus={playingStatus} play={play} />
+      <NotficationBar />
       Hi I am CoverFlow
     </div>
   )
