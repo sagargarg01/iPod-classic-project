@@ -185,7 +185,14 @@
   position: absolute;
   height: 100%;
   background-size: contain;
-  transition: linear 0.5s;
+}
+
+.slideShow {
+  transition: height 0.5s;
+}
+
+.slides {
+  transition: opacity 0.5s;
 }
 
 .bg {

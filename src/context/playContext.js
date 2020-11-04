@@ -7,6 +7,7 @@ const AppProvider = ({ children }) => {
   const [currentPlayStatus, setCurrentPlayStatus] = useState(false)
   const [activeState, setActiveState] = useState(0)
   const [dataIndex, setDataIndex] = useState(0)
+  const [isMenuVisible, setIsMenuVisible] = useState(true)
 
   return (
     <AppContext.Provider
@@ -19,6 +20,8 @@ const AppProvider = ({ children }) => {
         setCurrentPlayStatus,
         dataIndex,
         setDataIndex,
+        isMenuVisible,
+        setIsMenuVisible,
       }}
     >
       {children}

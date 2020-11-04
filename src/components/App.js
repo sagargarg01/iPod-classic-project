@@ -10,11 +10,16 @@ let lastRoundAngle = 0
 
 const App = () => {
   const {
+    activeState,
     setActiveState,
+    currentPlayStatus,
     setCurrentPlayStatus,
     play,
+    setPlay,
     dataIndex,
     setDataIndex,
+    isMenuVisible,
+    setIsMenuVisible,
   } = useContext(AppContext)
 
   const increaseActive = () => {
@@ -56,14 +61,35 @@ const App = () => {
   }, [])
 
   const handleMenuClick = () => {
-    setDataIndex((prevState) => (prevState <= 0 ? 0 : prevState - 1))
+    if (!isMenuVisible) {
+      setIsMenuVisible(true)
+    } else {
+      setDataIndex((prevState) => (prevState <= 0 ? 0 : prevState - 1))
+    }
   }
 
   const handleEnterClick = () => {
-    setDataIndex((prevState) =>
-      prevState >= data.length - 1 ? data.length - 1 : prevState + 1
-    )
-    setActiveState(0)
+    if ((dataIndex === 0 && activeState !== 1) || dataIndex === 2) {
+      setIsMenuVisible(false)
+
+      if (dataIndex === 2) {
+        setPlay(true)
+        setCurrentPlayStatus(true)
+      }
+    } else {
+      setDataIndex((prevState) =>
+        prevState >= data.length - 1 ? data.length - 1 : prevState + 1
+      )
+      setActiveState(0)
+    }
+  }
+
+  const handlePlayAndPause = () => {
+    if (play) {
+      let audio = document.getElementsByClassName('audio')[0]
+      currentPlayStatus ? audio.pause() : audio.play()
+      setCurrentPlayStatus((prevState) => !prevState)
+    }
   }
 
   return (
@@ -88,9 +114,7 @@ const App = () => {
                 src={assets.play_pause}
                 className='play_pause'
                 alt=''
-                onClick={() => {
-                  play && setCurrentPlayStatus((prevState) => !prevState)
-                }}
+                onClick={handlePlayAndPause}
               />
               <img src={assets.fastforward} className='fastforward' alt='' />
               <img src={assets.rewind} className='rewind' alt='' />

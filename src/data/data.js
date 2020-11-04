@@ -1,5 +1,5 @@
 export const data = [
-  ['coverflow', 'music', 'games', 'settings'],
+  ['cover Flow', 'music', 'games', 'settings'],
   ['Artist', 'Albums'],
   ['closer', 'Burn Out', 'All We Know', 'Here With Me', 'Silence', 'Wolves'],
 ]

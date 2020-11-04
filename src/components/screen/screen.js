@@ -1,56 +1,32 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import MenuList from './ScreenComponent/MenuList.js'
 import MusicPlayer from './ScreenComponent/MusicPlayer'
 import Settings from './ScreenComponent/Settings'
 import CoverFlow from './ScreenComponent/CoverFlow'
 import Games from './ScreenComponent/Games'
+import { AppContext } from '../../context/playContext'
 
-function screen({
-  mainMenu,
-  showmenu,
-  playingStatus,
-  play,
-  musicmenu,
-  musicMenuName,
-  showSongs,
-  activeSongId,
-  playingSongId,
-}) {
-  const Functionality = () => {
-    return (
-      <div className='cont'>
-        {mainMenu === 'coverflow' && (
-          <CoverFlow
-            mainMenu={mainMenu}
-            playingStatus={playingStatus}
-            play={play}
-          />
-        )}
-
-        {/* -------------------------------------------------------------------------------------------- */}
-        {mainMenu === 'music' && (
-          <MusicPlayer
-            playingStatus={playingStatus}
-            mainMenu={mainMenu}
-            play={play}
-            playingSongId={playingSongId}
-          />
-        )}
-
-        {mainMenu === 'games' && <Games />}
-        {mainMenu === 'settings' && <Settings />}
-      </div>
-    )
-  }
+function Screen() {
+  const { isMenuVisible, activeState, dataIndex, play } = useContext(AppContext)
 
   return (
     <div className='cont'>
       {/* -------------------------------------------------------------------------------------------- */}
-      <MenuList />
+      {isMenuVisible && <MenuList />}
 
-      {!showmenu && <Functionality />}
+      {(play || !isMenuVisible) && (
+        <div className='cont'>
+          {dataIndex === 0 && activeState === 0 && <CoverFlow />}
+
+          {/* -------------------------------------------------------------------------------------------- */}
+          {(dataIndex === 2 || play) && <MusicPlayer />}
+
+          {dataIndex === 0 && activeState === 2 && <Games />}
+          {dataIndex === 0 && activeState >= 3 && <Settings />}
+        </div>
+      )}
     </div>
   )
 }
 
-export default screen
+export default Screen
