@@ -45,7 +45,7 @@ const MenuAside = () => {
 
       {activeState === 2 && dataIndex === 0 && <GamesImage />}
 
-      {activeState === 3 && dataIndex === 0 && <Settings />}
+      {activeState >= 3 && dataIndex === 0 && <Settings />}
     </div>
   )
 }
