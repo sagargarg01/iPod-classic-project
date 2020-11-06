@@ -5,10 +5,11 @@ import ReactAudioPlayer from 'react-audio-player'
 import { AppContext } from '../../../context/playContext'
 
 const MusicPlayer = () => {
-  const { play, activeState, currentPlayStatus } = useContext(AppContext)
-  let track = coverflow[activeState]
+  const { play, songID } = useContext(AppContext)
   const [timer, setTimer] = useState([])
   const [bar, setBar] = useState([])
+
+  let track = coverflow[songID]
 
   const getElement = (element) => {
     return document.getElementsByClassName(element)[0]

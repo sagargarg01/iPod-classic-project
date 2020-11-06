@@ -22,7 +22,7 @@ function Screen() {
           {(dataIndex === 2 || play) && <MusicPlayer />}
 
           {dataIndex === 0 && activeState === 2 && <Games />}
-          {dataIndex === 0 && activeState >= 3 && <Settings />}
+          {dataIndex === 0 && activeState === 3 && <Settings />}
         </div>
       )}
     </div>

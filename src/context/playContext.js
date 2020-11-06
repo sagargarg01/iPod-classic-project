@@ -5,6 +5,7 @@ const AppContext = React.createContext()
 const AppProvider = ({ children }) => {
   const [play, setPlay] = useState(false)
   const [currentPlayStatus, setCurrentPlayStatus] = useState(false)
+  const [songID, setsongID] = useState(0)
   const [activeState, setActiveState] = useState(0)
   const [dataIndex, setDataIndex] = useState(0)
   const [isMenuVisible, setIsMenuVisible] = useState(true)
@@ -22,6 +23,8 @@ const AppProvider = ({ children }) => {
         setDataIndex,
         isMenuVisible,
         setIsMenuVisible,
+        songID,
+        setsongID,
       }}
     >
       {children}

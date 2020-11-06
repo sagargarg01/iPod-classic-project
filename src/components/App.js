@@ -9,6 +9,8 @@ let currentAngle
 let lastRoundAngle = 0
 
 const App = () => {
+  const [bindedRegion, setBindedRegion] = useState()
+
   const {
     activeState,
     setActiveState,
@@ -20,13 +22,14 @@ const App = () => {
     setDataIndex,
     isMenuVisible,
     setIsMenuVisible,
+    setsongID,
   } = useContext(AppContext)
 
-  const increaseActive = () => {
+  const increaseActive = (length) => {
     setActiveState((prevState) => {
       let nextActive = prevState + 1
 
-      if (nextActive >= 5) nextActive = 5
+      if (nextActive >= length) nextActive = length
       return nextActive
     })
   }
@@ -39,33 +42,79 @@ const App = () => {
     })
   }
 
+  const showIcon = (vol) => {
+    let volumeDOM = document.getElementsByClassName('volumeController')[0]
+    volumeDOM.innerHTML = ` <div> <img src = 
+          ${parseInt(vol * 100) < 45 ? assets.lowVolume : assets.volume} />
+         </div>
+        <div className = "volume">${parseInt(vol * 100)}</div>`
+
+    setTimeout(() => {
+      volumeDOM.innerHTML = ''
+    }, 10000)
+  }
+
+  const increaseVolume = () => {
+    let audio = document.getElementsByClassName('audio')[0]
+
+    let vol = parseInt(audio.volume * 100) / 100.0
+    audio.volume = vol + 0.02 >= 1 ? 1 : vol + 0.02
+    showIcon(audio.volume)
+  }
+
+  const decreaseVolume = () => {
+    let audio = document.getElementsByClassName('audio')[0]
+
+    let vol = parseInt(audio.volume * 100) / 100.0
+    audio.volume = vol - 0.02 <= 0 ? 0 : vol - 0.02
+    showIcon(audio.volume)
+  }
+
   useEffect(() => {
+    if (bindedRegion) {
+      bindedRegion.unbind(
+        document.getElementsByClassName('object')[0],
+        'rotate'
+      )
+    }
+
     var containerElement = document.getElementsByClassName('container')[0]
     var region = ZingTouch.Region(containerElement)
     var childElement = document.getElementsByClassName('object')[0]
     currentAngle = 0
+    setBindedRegion(region)
 
     region.bind(childElement, 'rotate', (e) => {
       currentAngle += e.detail.distanceFromLast
       const myAngle = Math.round(currentAngle % 360)
 
       if (Math.abs(lastRoundAngle - myAngle) >= 15) {
-        if (e.detail.distanceFromLast > 0) {
-          increaseActive()
-        } else {
-          decreaseActive()
+        if (isMenuVisible) {
+          e.detail.distanceFromLast > 0
+            ? increaseActive(data[dataIndex].length - 1)
+            : decreaseActive()
+        } else if (play) {
+          e.detail.distanceFromLast > 0 ? increaseVolume() : decreaseVolume()
         }
+
         lastRoundAngle = myAngle
       }
     })
-  }, [])
+  }, [isMenuVisible, dataIndex])
 
   const handleMenuClick = () => {
-    if (!isMenuVisible) {
-      setIsMenuVisible(true)
-    } else {
-      setDataIndex((prevState) => (prevState <= 0 ? 0 : prevState - 1))
-    }
+    isMenuVisible === false
+      ? setIsMenuVisible(true)
+      : setDataIndex((prevState) => {
+          if (prevState > 0) {
+            prevState--
+          }
+
+          setActiveState(
+            data[prevState].length - 1 < activeState ? 0 : activeState
+          )
+          return prevState
+        })
   }
 
   const handleEnterClick = () => {
@@ -75,6 +124,7 @@ const App = () => {
       if (dataIndex === 2) {
         setPlay(true)
         setCurrentPlayStatus(true)
+        setsongID(activeState)
       }
     } else {
       setDataIndex((prevState) =>

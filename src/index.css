@@ -20,6 +20,7 @@
 
 .cont {
   height: 100%;
+  position: relative;
 }
 
 /* screen style */
@@ -233,7 +234,16 @@
   font-weight: 500;
 }
 
-/* ---------- music and coverflow --------------- */
+/* coverflow */
+.coverflow {
+  position: absolute;
+  z-index: 100;
+  background: white;
+  height: 100%;
+  width: -webkit-fill-available;
+}
+
+/* ---------- music --------------- */
 /* music player style */
 .name {
   left: 15% !important;
@@ -350,6 +360,10 @@
 .gm {
   height: 100%;
   background: linear-gradient(rgb(177, 181, 192) 0%, rgb(104, 110, 122) 100%);
+  position: absolute;
+  z-index: 100;
+  top: 0px;
+  width: -webkit-fill-available;
 }
 
 .gm img {
@@ -359,8 +373,13 @@
 
 /* ---------- settings --------------- */
 .setting {
-  height: 100%;
-  padding: 50px;
+  padding-top: 50px;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  z-index: 100;
+  background: white;
+  width: -webkit-fill-available;
 }
 
 .setting img {

@@ -18,16 +18,7 @@ function MenuList() {
             {Data.map((item, index) => (
               <div
                 key={`${index}-${item}`}
-                className={
-                  // kind of cheat but nothing seems to work
-                  index === data[dataIndex].length - 1
-                    ? activeState >= index
-                      ? 'active'
-                      : ''
-                    : activeState === index
-                    ? 'active'
-                    : ''
-                }
+                className={activeState === index ? 'active' : ''}
               >
                 {item}
                 <span>
