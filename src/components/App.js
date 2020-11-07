@@ -3,7 +3,7 @@ import assets from '../assets/assets'
 import Screen from './screen/screen.js'
 import ZingTouch from 'zingtouch'
 import { AppContext } from '../context/playContext'
-import { data, settings } from '../data/data'
+import { data, settings, coverflow } from '../data/data'
 
 let currentAngle
 let lastRoundAngle = 0
@@ -96,6 +96,9 @@ const App = () => {
             ? increaseActive(data[dataIndex].length - 1)
             : decreaseActive()
         } else if (activeComponent === 0) {
+          e.detail.distanceFromLast > 0
+            ? increaseActive(coverflow.length - 1)
+            : decreaseActive()
         } else if (activeComponent === 3) {
           e.detail.distanceFromLast > 0
             ? increaseActive(settings.length - 1)
@@ -112,16 +115,9 @@ const App = () => {
   const handleMenuClick = () => {
     isMenuVisible === false
       ? setIsMenuVisible(true)
-      : setDataIndex((prevState) => {
-          if (prevState > 0) {
-            prevState--
-          }
+      : setDataIndex((prevState) => (prevState === 0 ? 0 : prevState--))
 
-          setActiveState(
-            data[prevState].length - 1 < activeState ? 0 : activeState
-          )
-          return prevState
-        })
+    setActiveState(0)
   }
 
   const handleEnterClick = () => {
@@ -144,6 +140,9 @@ const App = () => {
       }
     } else {
       if (activeComponent === 0) {
+        setPlay(true)
+        setCurrentPlayStatus(true)
+        setsongID(activeState)
       } else if (activeComponent === 3) {
         let url = document
           .getElementsByClassName('url')

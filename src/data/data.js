@@ -4,6 +4,15 @@ export const data = [
   ['closer', 'Burn Out', 'All We Know', 'Here With Me', 'Silence', 'Wolves'],
 ]
 
+export const coverflow = [
+  'closer',
+  'Burn Out',
+  'All We Know',
+  'Here With Me',
+  'Silence',
+  'Wolves',
+]
+
 export const settings = [
   {
     name: 'Github',

@@ -241,6 +241,13 @@
   background: white;
   height: 100%;
   width: -webkit-fill-available;
+  pointer-events: none !important;
+  user-select: none !important;
+}
+.coverflow__stage__14oqC {
+  user-select: none !important;
+  pointer-events: none !important;
+  width: 85% !important;
 }
 
 /* ---------- music --------------- */
