@@ -7,23 +7,25 @@ import Games from './ScreenComponent/Games'
 import { AppContext } from '../../context/playContext'
 
 function Screen() {
-  const { isMenuVisible, activeState, dataIndex, play } = useContext(AppContext)
+  const { isMenuVisible, activeComponent, dataIndex, play } = useContext(
+    AppContext
+  )
 
   return (
     <div className='cont'>
       {/* -------------------------------------------------------------------------------------------- */}
       {isMenuVisible && <MenuList />}
 
-      {(play || !isMenuVisible) && (
-        <div className='cont'>
-          {dataIndex === 0 && activeState === 0 && <CoverFlow />}
-
-          {/* -------------------------------------------------------------------------------------------- */}
-          {(dataIndex === 2 || play) && <MusicPlayer />}
-
-          {dataIndex === 0 && activeState === 2 && <Games />}
-          {dataIndex === 0 && activeState === 3 && <Settings />}
-        </div>
+      {!isMenuVisible && dataIndex === 0 && activeComponent === 0 && (
+        <CoverFlow />
+      )}
+      {play && (play || dataIndex === 2) && <MusicPlayer />}
+      {!isMenuVisible && dataIndex === 0 && activeComponent === 2 && <Games />}
+      {!isMenuVisible && dataIndex === 0 && activeComponent === 3 && (
+        <Settings />
+      )}
+      {!isMenuVisible && dataIndex === 0 && activeComponent === 4 && (
+        <MusicPlayer />
       )}
     </div>
   )

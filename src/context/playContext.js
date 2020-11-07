@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 
 const AppContext = React.createContext()
 
@@ -9,6 +9,7 @@ const AppProvider = ({ children }) => {
   const [activeState, setActiveState] = useState(0)
   const [dataIndex, setDataIndex] = useState(0)
   const [isMenuVisible, setIsMenuVisible] = useState(true)
+  const [activeComponent, setactiveComponent] = useState(0)
 
   return (
     <AppContext.Provider
@@ -25,6 +26,8 @@ const AppProvider = ({ children }) => {
         setIsMenuVisible,
         songID,
         setsongID,
+        activeComponent,
+        setactiveComponent,
       }}
     >
       {children}

@@ -25,6 +25,8 @@
 
 /* screen style */
 .screen {
+  pointer-events: none;
+  user-select: none;
   border: 4px solid black;
   background: white;
   border-radius: 0.5rem;
@@ -103,8 +105,6 @@
 
 /* inside screen style */
 .inside-screen {
-  pointer-events: none;
-  user-select: none;
   height: 100%;
   width: 100%;
   border-radius: 0.25rem;
@@ -273,6 +273,7 @@
 
 .mp {
   position: relative;
+  height: 100%;
 }
 
 .content {
@@ -330,14 +331,14 @@
 .timer {
   position: absolute;
   left: 20px;
-  bottom: 0px;
+  bottom: 35px;
   font-size: small;
 }
 
 .time {
   position: absolute;
   right: 20px;
-  bottom: 0px;
+  bottom: 36px;
   font-size: small;
 }
 
@@ -373,7 +374,7 @@
 
 /* ---------- settings --------------- */
 .setting {
-  padding-top: 50px;
+  padding-top: 20px;
   position: absolute;
   top: 0px;
   bottom: 0px;
@@ -396,4 +397,19 @@
   font-weight: bolder;
   margin-top: 40px;
   margin-left: 5px;
+}
+
+.text {
+  margin-bottom: 5px;
+}
+
+#setting-items {
+  padding: 4px;
+  font-weight: 500;
+}
+
+.url {
+  text-decoration: none;
+  width: 100%;
+  color: inherit;
 }

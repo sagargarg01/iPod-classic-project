@@ -1,48 +1,55 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import NotificationBar from './NotificationBar'
 import coverflow from '../../../assets/coverflow/coverflow'
 import ReactAudioPlayer from 'react-audio-player'
 import { AppContext } from '../../../context/playContext'
+import { data } from '../../../data/data'
 
 const MusicPlayer = () => {
-  const { play, songID } = useContext(AppContext)
-  const [timer, setTimer] = useState([])
-  const [bar, setBar] = useState([])
+  const { play, songID, setPlay, setCurrentPlayStatus } = useContext(AppContext)
+
+  useEffect(() => {
+    if (play) {
+      var timerDOM = getElement('timer')
+      let audio = getElement('audio')
+
+      setInterval(() => {
+        let ct = parseInt(audio.currentTime)
+
+        if (audio.currentTime === audio.duration) {
+          setPlay(false)
+          setCurrentPlayStatus(false)
+          data[0].splice(4, 1)
+        }
+
+        let min = parseInt(ct / 60)
+        let sec = parseInt(ct % 60)
+        timerDOM.innerText = sec < 10 ? `${min}:0${sec}` : `${min}:${sec}`
+      }, 1000)
+    }
+  }, [play])
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (play) {
+        let audio = getElement('audio')
+        var barWidth = getElement('fillup')
+        let duration = audio.duration
+        let base = duration / 100
+
+        setInterval(function () {
+          let ct = parseInt(audio.currentTime)
+          let width = parseInt(ct / base)
+          barWidth.style.width = `${width}%`
+        }, duration * 10)
+      }
+    }, 1000)
+  }, [play])
 
   let track = coverflow[songID]
 
   const getElement = (element) => {
     return document.getElementsByClassName(element)[0]
-  }
-
-  const fillTimer = () => {
-    var timer = getElement('timer')
-    let audio = getElement('audio')
-
-    setTimer(
-      setInterval(function () {
-        let ct = parseInt(audio.currentTime)
-
-        let min = parseInt(ct / 60)
-        let sec = parseInt(ct % 60)
-        timer.innerText = sec < 10 ? `${min}:0${sec}` : `${min}:${sec}`
-      }, 1000)
-    )
-  }
-
-  const fillBar = () => {
-    var bar = getElement('fillup')
-    let audio = getElement('audio')
-    let duration = audio.duration
-    let base = duration / 100
-
-    setBar(
-      setInterval(function () {
-        let ct = parseInt(audio.currentTime)
-        let width = parseInt(ct / base)
-        bar.style.width = `${width}%`
-      }, duration * 10)
-    )
   }
 
   const setDuration = () => {
@@ -54,11 +61,11 @@ const MusicPlayer = () => {
   }
 
   const startMusic = () => {
+    document.title = `iPod.js | ${track.album}`
+    data[0].length === 4 && data[0].push('Now Playing')
     getElement('audio').play()
 
     setDuration()
-    fillTimer()
-    fillBar()
   }
 
   return (
@@ -83,18 +90,7 @@ const MusicPlayer = () => {
         <ReactAudioPlayer
           className='audio'
           src={track.src}
-          onLoadedMetadata={() => {
-            if (timer) {
-              clearInterval(timer)
-            }
-            if (bar) {
-              clearInterval(bar)
-            }
-
-            if (play) {
-              startMusic()
-            }
-          }}
+          onLoadedMetadata={() => startMusic()}
         />
 
         <span className='timer'>0.00</span>

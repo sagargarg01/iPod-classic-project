@@ -3,7 +3,7 @@ import assets from '../assets/assets'
 import Screen from './screen/screen.js'
 import ZingTouch from 'zingtouch'
 import { AppContext } from '../context/playContext'
-import { data } from '../data/data'
+import { data, settings } from '../data/data'
 
 let currentAngle
 let lastRoundAngle = 0
@@ -23,6 +23,8 @@ const App = () => {
     isMenuVisible,
     setIsMenuVisible,
     setsongID,
+    activeComponent,
+    setactiveComponent,
   } = useContext(AppContext)
 
   const increaseActive = (length) => {
@@ -93,6 +95,11 @@ const App = () => {
           e.detail.distanceFromLast > 0
             ? increaseActive(data[dataIndex].length - 1)
             : decreaseActive()
+        } else if (activeComponent === 0) {
+        } else if (activeComponent === 3) {
+          e.detail.distanceFromLast > 0
+            ? increaseActive(settings.length - 1)
+            : decreaseActive()
         } else if (play) {
           e.detail.distanceFromLast > 0 ? increaseVolume() : decreaseVolume()
         }
@@ -118,19 +125,31 @@ const App = () => {
   }
 
   const handleEnterClick = () => {
-    if ((dataIndex === 0 && activeState !== 1) || dataIndex === 2) {
-      setIsMenuVisible(false)
+    if (isMenuVisible) {
+      dataIndex === 0 && setactiveComponent(activeState)
 
-      if (dataIndex === 2) {
+      if (activeState !== 1 && dataIndex === 0) {
+        setIsMenuVisible(false)
+        setActiveState(0)
+      } else if (dataIndex === 2) {
+        setIsMenuVisible(false)
         setPlay(true)
         setCurrentPlayStatus(true)
         setsongID(activeState)
+      } else {
+        setDataIndex((prevState) =>
+          prevState >= data.length - 1 ? data.length - 1 : prevState + 1
+        )
+        setActiveState(0)
       }
     } else {
-      setDataIndex((prevState) =>
-        prevState >= data.length - 1 ? data.length - 1 : prevState + 1
-      )
-      setActiveState(0)
+      if (activeComponent === 0) {
+      } else if (activeComponent === 3) {
+        let url = document
+          .getElementsByClassName('url')
+          [activeState].getAttribute('href')
+        window.open(url)
+      }
     }
   }
 
