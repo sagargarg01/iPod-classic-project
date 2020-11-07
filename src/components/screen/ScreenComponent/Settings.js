@@ -21,7 +21,12 @@ function Settings() {
           id='setting-items'
           className={index === activeState ? 'active' : ''}
         >
-          <a className='url' href={item.url} target='_blank'>
+          <a
+            className='url'
+            href={item.url}
+            target='_blank'
+            rel='noopener noreferrer'
+          >
             {item.name}
           </a>
         </div>
