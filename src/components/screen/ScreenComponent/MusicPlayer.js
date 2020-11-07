@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import NotificationBar from './NotificationBar'
 import coverflow from '../../../assets/coverflow/coverflow'
 import ReactAudioPlayer from 'react-audio-player'
@@ -7,12 +7,12 @@ import { data } from '../../../data/data'
 
 const MusicPlayer = () => {
   const { play, songID, setsongID } = useContext(AppContext)
+  const [fillBar, setFillBar] = useState()
 
   useEffect(() => {
     if (play) {
       var timerDOM = getElement('timer')
       let audio = getElement('audio')
-      var barWidth = getElement('fillup')
 
       setInterval(() => {
         let ct = parseInt(audio.currentTime)
@@ -27,19 +27,8 @@ const MusicPlayer = () => {
         let sec = parseInt(ct % 60)
         timerDOM.innerText = sec < 10 ? `${min}:0${sec}` : `${min}:${sec}`
       }, 1000)
-
-      setTimeout(() => {
-        let duration = audio.duration
-        let base = duration / 100
-
-        setInterval(function () {
-          let ct = parseInt(audio.currentTime)
-          let width = parseInt(ct / base)
-          barWidth.style.width = `${width}%`
-        }, duration * 10)
-      }, 3000)
     }
-  }, [play, songID])
+  }, [play])
 
   let track = coverflow[songID]
 
@@ -61,6 +50,26 @@ const MusicPlayer = () => {
     getElement('audio').play()
 
     setDuration()
+
+    if (fillBar) {
+      clearInterval(fillBar)
+    }
+    playerBar()
+  }
+
+  const playerBar = () => {
+    let audio = getElement('audio')
+    var barWidth = getElement('fillup')
+    let duration = audio.duration
+    let base = duration / 100
+
+    setFillBar(
+      setInterval(function () {
+        let ct = parseInt(audio.currentTime)
+        let width = parseInt(ct / base)
+        barWidth.style.width = `${width}%`
+      }, duration * 10)
+    )
   }
 
   return (
