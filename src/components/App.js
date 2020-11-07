@@ -115,7 +115,7 @@ const App = () => {
   const handleMenuClick = () => {
     isMenuVisible === false
       ? setIsMenuVisible(true)
-      : setDataIndex((prevState) => (prevState === 0 ? 0 : prevState--))
+      : setDataIndex((prevState) => (prevState === 0 ? 0 : prevState - 1))
 
     setActiveState(0)
   }
