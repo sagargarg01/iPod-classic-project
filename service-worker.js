@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/iPod-classic-project/precache-manifest.7a6f65dc7d376ae571bb655a03db912a.js"
+  "/iPod-classic-project/precache-manifest.49853aa46061086a98b3082e4f55ce2d.js"
 );
 
 self.addEventListener('message', (event) => {
