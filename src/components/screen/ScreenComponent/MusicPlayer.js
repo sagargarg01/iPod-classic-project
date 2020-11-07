@@ -6,7 +6,7 @@ import { AppContext } from '../../../context/playContext'
 import { data } from '../../../data/data'
 
 const MusicPlayer = () => {
-  const { play, songID, setPlay, setCurrentPlayStatus } = useContext(AppContext)
+  const { play, songID, setsongID } = useContext(AppContext)
 
   useEffect(() => {
     if (play) {
@@ -18,15 +18,15 @@ const MusicPlayer = () => {
         let ct = parseInt(audio.currentTime)
 
         if (audio.currentTime === audio.duration) {
-          setPlay(false)
-          setCurrentPlayStatus(false)
-          data[0].splice(4, 1)
+          setsongID((prevState) =>
+            prevState === coverflow.length - 1 ? 0 : prevState + 1
+          )
         }
 
         let min = parseInt(ct / 60)
         let sec = parseInt(ct % 60)
         timerDOM.innerText = sec < 10 ? `${min}:0${sec}` : `${min}:${sec}`
-      }, 4000)
+      }, 1000)
 
       setTimeout(() => {
         let duration = audio.duration
@@ -37,9 +37,9 @@ const MusicPlayer = () => {
           let width = parseInt(ct / base)
           barWidth.style.width = `${width}%`
         }, duration * 10)
-      }, 1000)
+      }, 3000)
     }
-  }, [play])
+  }, [play, songID])
 
   let track = coverflow[songID]
 
