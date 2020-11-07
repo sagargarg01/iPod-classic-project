@@ -5,7 +5,6 @@ import { settings } from '../../../data/data'
 
 function Settings() {
   const { activeState } = useContext(AppContext)
-  console.log(activeState)
   return (
     <div className='setting'>
       <div className='st_cont'>
