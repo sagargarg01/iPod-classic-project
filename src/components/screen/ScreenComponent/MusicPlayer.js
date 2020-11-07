@@ -26,7 +26,7 @@ const MusicPlayer = () => {
         let min = parseInt(ct / 60)
         let sec = parseInt(ct % 60)
         timerDOM.innerText = sec < 10 ? `${min}:0${sec}` : `${min}:${sec}`
-      }, 1000)
+      }, 4000)
 
       setTimeout(() => {
         let duration = audio.duration
