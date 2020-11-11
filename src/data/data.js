@@ -24,6 +24,6 @@ export const settings = [
   },
   {
     name: 'PortFolio',
-    url: 'https://sagargarg.in',
+    url: 'https://sagargarg.tech',
   },
 ]
